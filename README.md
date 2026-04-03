@@ -1,137 +1,180 @@
-🔐 Spring Boot Security Example (JWT Authentication)
+# 🔐 JWT Authentication using Spring Boot
 
-A simple Spring Boot REST API project demonstrating User Registration, Login, and JWT-based Authentication using Spring Security.
+This project demonstrates a basic implementation of **JWT (JSON Web Token) authentication** using Spring Boot.
 
-🚀 Features
-✅ User Registration (/register)
-✅ User Login (/login)
-✅ Password Encryption using BCrypt
-✅ JWT Token Generation
-✅ Secured API Endpoints
-✅ Bearer Token Authorization
-✅ Spring Security Integration
-✅ RESTful API Design
-🛠️ Tech Stack
-Java (JDK 17+ / 21+)
-Spring Boot
-Spring Security
-JWT (JSON Web Token)
-Hibernate / JPA
-MySQL (or any DB)
-Maven
-📂 Project Structure
-src/
- ├── controller/
- ├── service/
- ├── repository/
- ├── entity/
- ├── config/
- ├── security/
- └── dto/
-⚙️ Setup Instructions
-1. Clone Repository
-git clone https://github.com/your-username/spring-security-example.git
-cd spring-security-example
-2. Configure Database
+---
 
-Update application.properties:
+## 🚀 Features
 
-spring.datasource.url=jdbc:mysql://localhost:3306/your_db
-spring.datasource.username=root
-spring.datasource.password=your_password
+* User login with username & password
+* JWT token generation
+* Protected API endpoint
+* Token-based authentication using headers
+* Spring Security integration
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-3. Run the Application
-mvn spring-boot:run
+---
 
-App will start on:
+## 🛠️ Tech Stack
 
+* Java
+* Spring Boot
+* Spring Security
+* JWT (io.jsonwebtoken)
+* Maven
+
+---
+
+## 📁 Project Structure
+
+```
+src/main/java/com/AML_3A/JWTAuth/
+│
+├── controller/
+│   └── AuthController.java
+│
+├── security/
+│   ├── JwtUtil.java
+│   └── JwtFilter.java
+│
+├── config/
+│   └── SecurityConfig.java
+│
+└── JwtAuthApplication.java
+```
+
+---
+
+## 🔑 API Endpoints
+
+### 1️⃣ Login (Generate Token)
+
+**POST**
+
+```
+http://localhost:8080/api/login
+```
+
+**Body (x-www-form-urlencoded):**
+
+```
+username=admin
+password=123
+```
+
+**Response:**
+
+```
+JWT Token (example)
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+---
+
+### 2️⃣ Access Protected API
+
+**GET**
+
+```
+http://localhost:8080/api/secure
+```
+
+**Headers:**
+
+```
+Authorization: Bearer YOUR_TOKEN
+```
+
+**Response:**
+
+```
+You accessed protected API!
+```
+
+---
+
+## ⚙️ How It Works
+
+1. User sends login request with credentials
+2. Server validates credentials
+3. JWT token is generated using `JwtUtil`
+4. Client sends token in Authorization header
+5. `JwtFilter` intercepts request and validates token
+6. If valid → access granted
+7. If invalid/missing → access denied
+
+---
+
+## 🔐 JWT Flow
+
+```
+Client → Login → Server → Generate Token
+Client ← Token ← Server
+
+Client → Request (with token) → Server
+Server → Validate Token → Allow/Deny
+```
+
+---
+
+## ⚠️ Notes
+
+* This is a basic implementation for learning purposes
+* Credentials are hardcoded (not secure for production)
+* No database integration
+* Token validation is minimal
+
+---
+
+## 🚀 Future Improvements
+
+* Add MySQL database
+* Implement UserDetailsService
+* Use BCrypt password hashing
+* Role-based authentication (Admin/User)
+* Refresh tokens
+* Exception handling & logging
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository
+
+```
+git clone https://github.com/your-username/jwt-auth-project.git
+```
+
+2. Open in Eclipse / IntelliJ / VS Code
+
+3. Run the application
+
+```
+JwtAuthApplication.java
+```
+
+4. Server runs at:
+
+```
 http://localhost:8080
-🔑 API Endpoints
-📝 Register User
+```
 
-POST /register
+---
 
-{
-  "id": 9,
-  "username": "manjot",
-  "password": "mj123"
-}
+## 🧪 Testing
 
-✅ Response:
+Use Postman:
 
-{
-  "id": 9,
-  "username": "manjot",
-  "password": "<encrypted_password>"
-}
-🔐 Login User
+1. Call `/api/login` → get token
+2. Use token in header → call `/api/secure`
 
-POST /login
+---
 
-{
-  "id": 9,
-  "username": "manjot",
-  "password": "mj123"
-}
+## 👨‍💻 Author
 
-✅ Response:
+**Riyan Imtiyaz**
 
-<JWT_TOKEN>
-🔒 Access Secured Endpoint
+---
 
-GET /students
+## ⭐ If you found this helpful
 
-Add Header:
-Authorization: Bearer <JWT_TOKEN>
-
-✅ Response:
-
-[
-  {
-    "id": 1,
-    "name": "Manjot",
-    "marks": 89
-  },
-  {
-    "id": 2,
-    "name": "Harleen",
-    "marks": 92
-  }
-]
-🔄 Flow Diagram
-User → Register → Stored in DB (Encrypted Password)
-
-User → Login → JWT Token Generated
-
-User → Access API → Sends JWT → Verified → Access Granted
-🔐 Security Concepts Used
-Authentication vs Authorization
-Stateless Session using JWT
-Password Hashing (BCrypt)
-Filter-based JWT validation
-Spring Security Configuration
-🧪 Testing with Postman
-Register a user
-Login to get JWT token
-Use token in Authorization tab
-Access secured endpoints
-📌 Future Improvements
-Refresh Token implementation
-Role-based Authorization (ADMIN/USER)
-Swagger API Documentation
-Exception Handling
-Dockerization
-👨‍💻 Author
-
-Manjot Singh
-B.Tech CSE (AIML)
-
-⭐ Contribute
-Feel free to fork this repo and improve it!
-
-![WhatsApp Image 2026-03-31 at 22 18 49](https://github.com/user-attachments/assets/f4811dc8-0d60-4cc9-b139-aa50cee749b5)
-![WhatsApp Image 2026-03-31 at 22 18 48](https://github.com/user-attachments/assets/16fe6027-f07b-4bd0-a40e-083afaa694d5)
-![WhatsApp Image 2026-03-31 at 22 18 48 (2)](https://github.com/user-attachments/assets/491c53c6-3bdc-439e-ae24-a8c09c38f7f4)
-![WhatsApp Image 2026-03-31 at 22 18 48 (1)](https://github.com/user-attachments/assets/10394939-94bc-467a-8995-40ea4cddbb75)
+Give this repo a ⭐ on GitHub!
