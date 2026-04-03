@@ -166,6 +166,9 @@ Use Postman:
 
 1. Call `/api/login` → get token
 2. Use token in header → call `/api/secure`
+<img width="1919" height="1130" alt="Screenshot 2026-04-03 151523" src="https://github.com/user-attachments/assets/6b6a1c6c-21a5-4df0-8a8a-476f5c7d767f" />
+<img width="1919" height="1132" alt="Screenshot 2026-04-03 151503" src="https://github.com/user-attachments/assets/cced43ba-a64c-4b19-80a7-f743fd6f21df" />
+<img width="1919" height="1129" alt="Screenshot 2026-04-03 151447" src="https://github.com/user-attachments/assets/0377b9dc-3276-42d6-a981-76935d4a6078" />
 
 ---
 
